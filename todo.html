@@ -1,0 +1,193 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Multi To-Do List</title>
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(135deg, #a8e6cf, #dcedc1);
+      margin: 0;
+      padding: 40px 10px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #2e7d32;
+      margin-bottom: 30px;
+    }
+
+    .lists-container {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 30px;
+    }
+
+    .todo-container {
+      background: white;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+      width: 300px;
+      text-align: center;
+    }
+
+    .todo-container h2 {
+      color: #388e3c;
+      margin-bottom: 15px;
+    }
+
+    .input-section {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 15px;
+    }
+
+    input[type="text"] {
+      width: 70%;
+      padding: 8px;
+      border: 2px solid #81c784;
+      border-radius: 5px;
+      outline: none;
+      font-size: 15px;
+    }
+
+    button {
+      background-color: #388e3c;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #2e7d32;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+      text-align: left;
+    }
+
+    li {
+      background-color: #f1f8e9;
+      padding: 8px;
+      margin-bottom: 8px;
+      border-radius: 5px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: 0.3s ease;
+    }
+
+    li.completed {
+      text-decoration: line-through;
+      background-color: #c8e6c9;
+    }
+
+    .delete-btn {
+      background: #e53935;
+      border: none;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+      padding: 4px 7px;
+      transition: background-color 0.3s;
+    }
+
+    .delete-btn:hover {
+      background-color: #b71c1c;
+    }
+  </style>
+</head>
+<body>
+  <h1>🗂️ My Organized To-Do Lists</h1>
+
+  <div class="lists-container">
+    <!-- Grocery List -->
+    <div class="todo-container" id="groceryList">
+      <h2>🛒 Grocery</h2>
+      <div class="input-section">
+        <input type="text" placeholder="Add grocery item..." />
+        <button>Add</button>
+      </div>
+      <ul></ul>
+    </div>
+
+    <!-- Stationery List -->
+    <div class="todo-container" id="stationeryList">
+      <h2>🖊️ Stationery</h2>
+      <div class="input-section">
+        <input type="text" placeholder="Add stationery item..." />
+        <button>Add</button>
+      </div>
+      <ul></ul>
+    </div>
+
+    <!-- Furniture List -->
+    <div class="todo-container" id="furnitureList">
+      <h2>🪑 Furniture</h2>
+      <div class="input-section">
+        <input type="text" placeholder="Add furniture item..." />
+        <button>Add</button>
+      </div>
+      <ul></ul>
+    </div>
+  </div>
+
+  <script>
+    // Function to set up a to-do list
+    function setupTodoList(containerId) {
+      const container = document.getElementById(containerId);
+      const input = container.querySelector("input");
+      const addBtn = container.querySelector("button");
+      const list = container.querySelector("ul");
+
+      addBtn.addEventListener("click", () => {
+        const text = input.value.trim();
+        if (text === "") {
+          alert("Please enter a task!");
+          return;
+        }
+
+        const li = document.createElement("li");
+        li.textContent = text;
+
+        // Mark as complete
+        li.addEventListener("click", () => {
+          li.classList.toggle("completed");
+        });
+
+        // Delete button
+        const del = document.createElement("button");
+        del.textContent = "X";
+        del.className = "delete-btn";
+        del.addEventListener("click", (e) => {
+          e.stopPropagation();
+          li.remove();
+        });
+
+        li.appendChild(del);
+        list.appendChild(li);
+        input.value = "";
+      });
+
+      // Add with Enter key
+      input.addEventListener("keypress", (e) => {
+        if (e.key === "Enter") addBtn.click();
+      });
+    }
+
+    // Initialize all three lists
+    setupTodoList("groceryList");
+    setupTodoList("stationeryList");
+    setupTodoList("furnitureList");
+  </script>
+</body>
+</html>
