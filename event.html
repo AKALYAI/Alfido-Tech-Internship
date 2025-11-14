@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Whispers of Nature</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Poppins", sans-serif;
+      height: 100vh;
+      overflow: hidden;
+      background-image: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1920&q=80');
+      background-size: cover;
+      background-position: center;
+      color: white;
+      transition: background-color 1s ease;
+    }
+
+    .overlay {
+      background-color: rgba(0, 0, 0, 0.4);
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      transition: background-color 1s ease;
+    }
+
+    .content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      top: 20%;
+      padding: 0 20px;
+    }
+
+    h1 {
+      font-size: 2.5em;
+      margin-bottom: 10px;
+      letter-spacing: 2px;
+    }
+
+    p {
+      font-size: 1.2em;
+      line-height: 1.6;
+      max-width: 700px;
+      margin: 10px auto;
+      font-style: italic;
+    }
+
+    button {
+      position: relative;
+      z-index: 1;
+      margin-top: 40px;
+      padding: 12px 28px;
+      font-size: 18px;
+      cursor: pointer;
+      border: none;
+      background-color: #2e7d32;
+      color: white;
+      border-radius: 6px;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #43a047;
+    }
+  </style>
+</head>
+<body>
+  <div class="overlay"></div>
+
+  <div class="content">
+    <h1>🌿 Whispers of Nature 🌿</h1>
+    <p>
+      The earth breathes in colors unseen,<br>
+      where sunlight kisses leaves of green.<br>
+      The wind hums softly through the trees,<br>
+      a timeless song of skies and seas.
+    </p>
+    <p>
+      Each flower blooms, a fleeting art,<br>
+      a whisper born from nature’s heart.<br>
+      And as the rivers dance and flow,<br>
+      the world reminds us — <em>just be slow.</em>
+    </p>
+
+    <button id="colorButton">Change Nature Color</button>
+  </div>
+
+  <script>
+    const natureColors = [
+      "#2E8B57", "#556B2F", "#8FBC8F",
+      "#3CB371", "#4682B4", "#20B2AA",
+      "#B8860B", "#6B8E23", "#A0522D", "#8B4513"
+    ];
+
+    const button = document.getElementById("colorButton");
+    const overlay = document.querySelector(".overlay");
+
+    button.addEventListener("click", () => {
+      const randomColor = natureColors[Math.floor(Math.random() * natureColors.length)];
+      overlay.style.backgroundColor = randomColor + "AA";
+    });
+  </script>
+</body>
+</html>
